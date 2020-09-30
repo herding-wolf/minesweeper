@@ -1,0 +1,53 @@
+
+/common/target/
+/domain/target/
+/interfaces/target/
+/repository/target/
+/restapi/target/
+/starter/target/
+/service/target/
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+*.log
+/target
+/logs
+/lib/
+
+
+# Maven #
+target/
+
+# IDEA #
+.idea/
+*.iml
+*.log
+*.gz
+
+# Eclipse #
+.settings/
+.classpath
+.project
+
