@@ -33,7 +33,7 @@ public class GamePanel extends JPanel {
     public GamePanel(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        this.bombCount = rows * cols / 10;
+        this.bombCount = rows * cols / 6;
         this.labels = new JLabel[rows][cols];
         this.buttons = new MyButton[rows][cols];
         this.setLayout(null);
