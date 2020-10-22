@@ -9,7 +9,9 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * 坐标
@@ -36,11 +38,15 @@ public class Coordinate {
         arr[x][y] = value;
     }
 
-    public void forOffset(Consumer<Coordinate> consumer) {
-        Arrays.stream(GlobalConstants.offset)
+    public List<Coordinate> getOffset() {
+        return Arrays.stream(GlobalConstants.offset)
                 .map(t -> new Coordinate(x + t[0], y + t[1]))
                 .filter(Coordinate::verify)
-                .forEach(consumer::accept);
+                .collect(Collectors.toList());
+    }
+
+    public void forOffset(Consumer<Coordinate> consumer) {
+        getOffset().forEach(consumer::accept);
     }
 
     private boolean verify() {

@@ -99,7 +99,6 @@ public class Test {
         List<Coordinate> result = new ArrayList<>();
         if ("0".equals(coordinate.getValue(labels))) {
             coordinate.forOffset(t -> {
-                System.out.println();
                 if (!t.getValue(openFlag)) {
                     result.addAll(open(labels, t));
                 }
@@ -128,7 +127,23 @@ public class Test {
     }
 
     private static void print(Object[][] labels) {
-        DoubleForeach.arrayForeach(labels, t -> System.out.println(), t -> System.out.print(t + "\t"));
+        DoubleForeach.arrayForeach(labels, (t, i, j) -> {
+            if (i == 0 && j == 0) {
+                System.out.print("r\\c");
+                for (int colNum = 0; colNum < labels[0].length; colNum++) {
+                    System.out.print("\t" + colNum);
+                }
+                System.out.println();
+            }
+
+            if (j == 0) {
+                System.out.print(i + "\t");
+            }
+            System.out.print(t + "\t");
+            if (j == labels[i].length - 1) {
+                System.out.println();
+            }
+        });
     }
 
     private static boolean verify(String[][] labels, int row, int col) {
