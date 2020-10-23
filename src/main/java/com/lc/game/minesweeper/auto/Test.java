@@ -3,6 +3,7 @@ package com.lc.game.minesweeper.auto;
 import com.lc.game.minesweeper.constants.GlobalConfig;
 import com.lc.game.minesweeper.constants.GlobalConstants;
 import com.lc.game.minesweeper.entity.Coordinate;
+import com.lc.game.minesweeper.service.MineCellService;
 import com.lc.game.minesweeper.utils.functions.DoubleForeach;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class Test {
             int rRow = (int) (Math.random() * labels.length);
             // 生成一个随机数表示列坐标
             int rCol = (int) (Math.random() * labels[0].length);
-            while ("*".equals(labels[rRow][rCol])) {
+            while ((rRow <= 2 && rCol <= 2) || "*".equals(labels[rRow][rCol])) {
                 rRow = (int) (Math.random() * labels.length);
                 rCol = (int) (Math.random() * labels[0].length);
             }
@@ -92,7 +93,7 @@ public class Test {
      */
     private static List<Coordinate> open(String[][] labels, Coordinate coordinate) {
         if ("*".equals(coordinate.getValue(labels))) {
-            throw new RuntimeException("结束");
+            throw new RuntimeException("炸死");
         }
 
         coordinate.setValue(openFlag, true);
@@ -115,10 +116,11 @@ public class Test {
         while (true) {
             Coordinate coordinate = autoRobot.nextCoordinate(map);
             if (coordinate == null) {
-                print(autoRobot.getOpenData());
+                System.out.println(MineCellService.mineCellMap);
                 throw new RuntimeException("推荐失败");
             }
             List<Coordinate> open = open(labels, coordinate);
+            System.out.println(open);
             map = open.stream().collect(Collectors.toMap(
                             Function.identity(),
                             t -> Integer.parseInt(t.getValue(labels)),

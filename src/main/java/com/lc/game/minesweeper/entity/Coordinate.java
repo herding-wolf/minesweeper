@@ -2,10 +2,7 @@ package com.lc.game.minesweeper.entity;
 
 import com.lc.game.minesweeper.constants.GlobalConstants;
 import com.lc.game.minesweeper.constants.GlobalConfig;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.util.Arrays;
@@ -20,10 +17,11 @@ import java.util.stream.Collectors;
  * @date 2020/10/21
  */
 @Data
+@ToString
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode
 public class Coordinate {
 
     private int x;
@@ -51,5 +49,9 @@ public class Coordinate {
 
     private boolean verify() {
         return x >= 0 && x < GlobalConfig.maxRows && y >= 0 && y < GlobalConfig.maxCols;
+    }
+
+    public String toString() {
+        return String.format("(%s, %s)", x, y);
     }
 }
